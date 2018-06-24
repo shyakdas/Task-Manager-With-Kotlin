@@ -1,3 +1,7 @@
 <resources>
     <string name="app_name">ToDoList</string>
+    <string name="enter_title">Please enter title</string>
+    <string name="enter_description">Please enter is description</string>
+    <string name="message_empty_note">To create note please enter title and description</string>
+    <string name="note_save">Note is Saved</string>
 </resources>
