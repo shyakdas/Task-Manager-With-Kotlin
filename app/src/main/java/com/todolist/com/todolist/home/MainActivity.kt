@@ -16,22 +16,22 @@ class MainActivity : AppCompatActivity(), View.OnClickListener {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_main)
-        search.setOnClickListener(this)
-        sort.setOnClickListener(this)
-        new_note.setOnClickListener(this)
+        search_main.setOnClickListener(this)
+        sort_main.setOnClickListener(this)
+        new_note_main.setOnClickListener(this)
     }
 
     override fun onClick(v: View?) {
         when (v?.id) {
-            R.id.search -> {
+            R.id.search_main -> {
                 var searchFragment = SearchFragment()
                 supportFragmentManager.inTransaction { add(R.id.top, searchFragment) }
             }
-            R.id.sort -> {
+            R.id.sort_main -> {
                 var sortFragment = SortFragment()
                 supportFragmentManager.inTransaction { add(R.id.top, sortFragment) }
             }
-            R.id.new_note -> {
+            R.id.new_note_main -> {
                 var addNoteFragment = AddNoteFragment()
                 supportFragmentManager.inTransaction { add(R.id.top, addNoteFragment) }
             }
