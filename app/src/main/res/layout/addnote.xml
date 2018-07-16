@@ -50,7 +50,7 @@
         android:layout_marginRight="8dp"
         android:layout_marginStart="8dp"
         android:layout_marginTop="8dp"
-        android:text="@string/app_name"
+        android:text="Create Note"
         android:textColor="@color/md_indigo_A200"
         android:textSize="20sp"
         app:layout_constraintBottom_toBottomOf="@+id/view2"

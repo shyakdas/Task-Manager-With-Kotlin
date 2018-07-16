@@ -5,10 +5,12 @@ import android.os.Bundle
 import android.support.v4.app.FragmentManager
 import android.support.v4.app.FragmentTransaction
 import android.support.v7.app.AppCompatActivity
+import android.support.v7.widget.LinearLayoutManager
 import android.util.Log
 import android.view.View
 import com.todolist.com.todolist.R
 import com.todolist.com.todolist.ToDoList
+import com.todolist.com.todolist.adapter.NoteAdapter
 import com.todolist.com.todolist.addnote.AddNoteFragment
 import com.todolist.com.todolist.database.AppDatabase
 import com.todolist.com.todolist.database.NoteDao
@@ -29,8 +31,9 @@ class MainActivity : AppCompatActivity(), View.OnClickListener {
         new_note_main.setOnClickListener(this)
         appDatabase = ToDoList.database!!
         listCategoryDao = appDatabase.listNoteDao()
-
+        recylerview.layoutManager = LinearLayoutManager(this)
         AsyncTask.execute {
+            recylerview.adapter = NoteAdapter(listCategoryDao.getAll(), this)
             Log.d("TAG", "listSize==" + listCategoryDao.getAll().size)
         }
     }
