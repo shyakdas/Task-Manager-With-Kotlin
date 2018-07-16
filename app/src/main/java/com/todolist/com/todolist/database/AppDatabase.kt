@@ -4,8 +4,8 @@ import android.arch.persistence.room.Database
 import android.arch.persistence.room.RoomDatabase
 import com.todolist.com.todolist.model.NoteModel
 
-@Database(entities = arrayOf(NoteModel::class), version = 1, exportSchema = false)
-abstract class NoteDatabase : RoomDatabase() {
+@Database(entities = [(NoteModel::class)], version = 1)
+abstract class AppDatabase : RoomDatabase() {
 
-    abstract fun taskDao(): NoteDao
+    abstract fun listNoteDao(): NoteDao
 }

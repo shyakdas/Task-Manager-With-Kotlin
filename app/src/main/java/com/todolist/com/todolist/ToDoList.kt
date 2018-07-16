@@ -1,16 +1,18 @@
 package com.todolist.com.todolist
 
 import android.app.Application
-import com.todolist.com.todolist.database.NoteDatabase
+import android.arch.persistence.room.Room
+import com.todolist.com.todolist.database.AppDatabase
 
 class ToDoList : Application() {
 
     companion object {
-        var database: NoteDatabase? = null
+        var database: AppDatabase? = null
     }
 
     override fun onCreate() {
         super.onCreate()
-        //ToDoList.database = Room.databaseBuilder(this, NoteDatabase::class.java, "we-need-db").build()
+        ToDoList.database = Room.databaseBuilder(this, AppDatabase::class.java,
+                "list-master-db").build()
     }
 }

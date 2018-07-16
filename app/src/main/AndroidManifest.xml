@@ -3,6 +3,7 @@
     package="com.todolist.com.todolist">
 
     <application
+        android:name=".ToDoList"
         android:allowBackup="true"
         android:icon="@mipmap/ic_launcher"
         android:label="@string/app_name"
