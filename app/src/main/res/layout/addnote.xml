@@ -6,159 +6,93 @@
     android:background="@android:color/white">
 
     <View
-        android:id="@+id/view3"
+        android:id="@+id/view2"
         android:layout_width="match_parent"
         android:layout_height="55dp"
-        android:layout_marginTop="30dp"
+        android:background="@android:color/white" />
+
+    <View
+        android:id="@+id/view"
+        android:layout_width="match_parent"
+        android:layout_height="60dp"
+        android:background="@android:color/white"
+        app:layout_constraintBottom_toBottomOf="parent" />
+
+    <ImageView
+        android:id="@+id/search_main"
+        android:layout_width="30dp"
+        android:layout_height="30dp"
+        android:layout_marginLeft="20dp"
+        android:src="@mipmap/backbutton"
+        app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintLeft_toLeftOf="parent"
+        app:layout_constraintTop_toTopOf="@+id/view" />
+
+    <ImageView
+        android:id="@+id/sort_main"
+        android:layout_width="30dp"
+        android:layout_height="30dp"
+        android:layout_marginRight="20dp"
+        android:src="@mipmap/alarm"
+        app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintRight_toRightOf="parent"
-        app:layout_constraintTop_toTopOf="parent" />
+        app:layout_constraintTop_toTopOf="@id/view" />
+
 
     <TextView
-        android:id="@+id/note_save"
+        android:id="@+id/textView2"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
+        android:layout_marginBottom="8dp"
         android:layout_marginEnd="8dp"
         android:layout_marginLeft="8dp"
         android:layout_marginRight="8dp"
         android:layout_marginStart="8dp"
         android:layout_marginTop="8dp"
-        android:background="@drawable/add_background"
-        android:paddingBottom="10dp"
-        android:paddingLeft="20dp"
-        android:paddingRight="20dp"
-        android:paddingTop="10dp"
-        android:text="Save"
-        android:textColor="@android:color/white"
+        android:text="@string/app_name"
+        android:textColor="@color/md_indigo_A200"
         android:textSize="20sp"
+        app:layout_constraintBottom_toBottomOf="@+id/view2"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintStart_toStartOf="@+id/view2"
         app:layout_constraintTop_toTopOf="parent" />
 
-    <ImageView
-        android:id="@+id/imageView"
-        android:layout_width="30dp"
-        android:layout_height="30dp"
-        android:layout_marginLeft="8dp"
-        android:layout_marginStart="8dp"
+    <android.support.design.widget.TextInputEditText
+        android:id="@+id/note_title"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginBottom="10dp"
+        android:layout_marginLeft="15dp"
+        android:layout_marginRight="15dp"
+        android:layout_marginTop="10dp"
+        android:hint="Title"
+        android:maxLines="1"
+        android:textSize="20sp"
         app:layout_constraintLeft_toLeftOf="parent"
-        app:layout_constraintTop_toBottomOf="@id/note_save"
-        app:srcCompat="@mipmap/cross" />
+        app:layout_constraintRight_toRightOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/view2" />
 
-    <TextView
-        android:id="@+id/textView3"
+    <android.support.design.widget.TextInputEditText
+        android:id="@+id/note_description"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginLeft="15dp"
+        android:layout_marginRight="15dp"
+        android:layout_marginTop="20dp"
+        android:hint="Description"
+        android:maxLines="5"
+        android:textSize="20sp"
+        app:layout_constraintTop_toBottomOf="@id/note_title" />
+
+    <android.support.design.widget.FloatingActionButton
+        android:id="@+id/note_save"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginEnd="8dp"
-        android:layout_marginLeft="8dp"
-        android:layout_marginRight="8dp"
-        android:layout_marginStart="8dp"
-        android:layout_marginTop="20dp"
-        android:text="Write your note here"
-        android:textColor="@android:color/background_dark"
-        android:textSize="20dp"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/view3" />
-
-    <View
-        android:id="@+id/row_title"
-        android:layout_width="match_parent"
-        android:layout_height="55dp"
-        android:layout_marginLeft="10dp"
-        android:layout_marginRight="10dp"
-        android:layout_marginTop="20dp"
-        android:background="#B0BBC5"
-        app:layout_constraintTop_toBottomOf="@id/textView3" />
-
-    <ImageView
-        android:id="@+id/title_image"
-        android:layout_width="30dp"
-        android:layout_height="30dp"
-        android:layout_marginLeft="10dp"
-        android:src="@mipmap/notes"
-        app:layout_constraintBottom_toBottomOf="@id/row_title"
-        app:layout_constraintStart_toStartOf="@id/row_title"
-        app:layout_constraintTop_toTopOf="@id/row_title" />
-
-    <EditText
-        android:id="@+id/note_title"
-        android:layout_width="0dp"
-        android:layout_height="40dp"
-        android:layout_marginLeft="20dp"
         android:layout_marginRight="20dp"
-        android:background="#B0BBC5"
-        android:hint="Title"
-        app:layout_constraintBottom_toBottomOf="@id/row_title"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toEndOf="@+id/title_image"
-        app:layout_constraintTop_toTopOf="@id/row_title" />
-
-    <View
-        android:id="@+id/row_description"
-        android:layout_width="match_parent"
-        android:layout_height="55dp"
-        android:layout_marginLeft="10dp"
-        android:layout_marginRight="10dp"
         android:layout_marginTop="20dp"
-        android:background="#B0BBC5"
-        app:layout_constraintTop_toBottomOf="@id/row_title" />
-
-    <ImageView
-        android:id="@+id/title_description"
-        android:layout_width="30dp"
-        android:layout_height="30dp"
-        android:layout_marginLeft="10dp"
-        android:src="@mipmap/description"
-        app:layout_constraintBottom_toBottomOf="@id/row_description"
-        app:layout_constraintStart_toStartOf="@id/row_description"
-        app:layout_constraintTop_toTopOf="@id/row_description" />
-
-    <EditText
-        android:id="@+id/note_description"
-        android:layout_width="0dp"
-        android:layout_height="40dp"
-        android:layout_marginLeft="20dp"
-        android:layout_marginRight="20dp"
-        android:background="#B0BBC5"
-        android:hint="Description"
-        app:layout_constraintBottom_toBottomOf="@id/row_description"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toEndOf="@+id/title_description"
-        app:layout_constraintTop_toTopOf="@id/row_description" />
-
-    <View
-        android:id="@+id/row_image"
-        android:layout_width="match_parent"
-        android:layout_height="55dp"
-        android:layout_marginLeft="10dp"
-        android:layout_marginRight="10dp"
-        android:layout_marginTop="20dp"
-        android:background="#B0BBC5"
-        app:layout_constraintTop_toBottomOf="@id/row_description" />
-
-    <ImageView
-        android:id="@+id/image_upload"
-        android:layout_width="30dp"
-        android:layout_height="30dp"
-        android:layout_marginLeft="10dp"
-        android:src="@mipmap/upload"
-        app:layout_constraintBottom_toBottomOf="@id/row_image"
-        app:layout_constraintStart_toStartOf="@id/row_image"
-        app:layout_constraintTop_toTopOf="@id/row_image" />
-
-    <TextView
-        android:layout_width="0dp"
-        android:layout_height="wrap_content"
-        android:layout_marginLeft="20dp"
-        android:layout_marginRight="20dp"
-        android:background="#B0BBC5"
-        android:text="Upload a image"
-        android:textColor="@android:color/black"
-        android:textSize="18sp"
-        app:layout_constraintBottom_toBottomOf="@id/row_image"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toEndOf="@+id/image_upload"
-        app:layout_constraintTop_toTopOf="@id/row_image" />
-
+        android:backgroundTint="#FFFF"
+        android:src="@mipmap/save"
+        app:fabSize="normal"
+        app:layout_constraintRight_toRightOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/note_description" />
 </android.support.constraint.ConstraintLayout>
