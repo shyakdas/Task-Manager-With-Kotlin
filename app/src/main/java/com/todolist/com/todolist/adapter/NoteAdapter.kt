@@ -9,7 +9,7 @@ import com.todolist.com.todolist.R
 import com.todolist.com.todolist.model.NoteModel
 import kotlinx.android.synthetic.main.note_item.view.*
 
-class NoteAdapter(val items: List<NoteModel>, val context: Context) : RecyclerView.Adapter<NoteViewHolder>() {
+class NoteAdapter(private val items: List<NoteModel>, private val context: Context) : RecyclerView.Adapter<NoteViewHolder>() {
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): NoteViewHolder {
         return NoteViewHolder(LayoutInflater.from(context).inflate(R.layout.note_item, parent, false))
@@ -26,6 +26,6 @@ class NoteAdapter(val items: List<NoteModel>, val context: Context) : RecyclerVi
 }
 
 class NoteViewHolder(view: View) : RecyclerView.ViewHolder(view) {
-    val mTitle = view.item_title
-    val mDescription = view.item_description
+    val mTitle = view.item_title!!
+    val mDescription = view.item_description!!
 }
