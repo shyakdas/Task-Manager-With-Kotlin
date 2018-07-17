@@ -4,4 +4,5 @@
     <color name="colorPrimaryDark">#E0E0E0</color>
     <color name="colorAccent">#3D5AFE</color>
     <color name="md_indigo_A200">#3D5AFE</color>
+    <color name="second_white">#eee9e9</color>
 </resources>
