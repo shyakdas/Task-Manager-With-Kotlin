@@ -23,7 +23,10 @@ class NoteAdapter(private val items: List<NoteModel>, private val context: Conte
 
     override fun onBindViewHolder(holder: NoteViewHolder, position: Int) {
         holder.bind(items[position])
-        holder.itemView.setOnClickListener { noteItemListener.onPostClick(position) }
+        holder.itemView.setOnClickListener {
+            noteItemListener.onPostClick(position,
+                    items.get(position).title, items.get(position).description)
+        }
     }
 
     class NoteViewHolder(view: View) : RecyclerView.ViewHolder(view) {

@@ -8,7 +8,9 @@ import android.support.v4.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import android.widget.EditText
 import android.widget.ImageView
+import android.widget.TextView
 import android.widget.Toast
 import com.todolist.com.todolist.R
 import com.todolist.com.todolist.ToDoList
@@ -24,14 +26,29 @@ class AddNoteFragment : Fragment(), View.OnClickListener {
     private lateinit var listCategoryDao: NoteDao
     private lateinit var appDatabase: AppDatabase
 
+    companion object {
+        private val TAG: String = AddNoteFragment.javaClass.name
+    }
+
     override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?): View? {
-        val view: View = inflater!!.inflate(R.layout.addnote, container, false)
+        val view: View = inflater.inflate(R.layout.addnote, container, false)
         val mSaveNote: FloatingActionButton = view.findViewById(R.id.note_save)
         val mCrossButton: ImageView = view.findViewById(R.id.search_main)
+        val mNoteBar: TextView = view.findViewById(R.id.create_note)
+        val title: EditText = view.findViewById(R.id.note_title)
+        val description: EditText = view.findViewById(R.id.note_description)
         mSaveNote.setOnClickListener(this)
         mCrossButton.setOnClickListener(this)
         appDatabase = ToDoList.database!!
         listCategoryDao = appDatabase.listNoteDao()
+        if (arguments?.getBoolean("isToUpdateNote") != null) {
+            mNoteBar.text = "Edit Note"
+            val editNoteTitle: String = arguments?.getString("title", "")!!
+            val editNoteDescription: String = arguments?.getString("description", "")!!
+            val editNotePosition = arguments?.getInt("position", -1)
+            title.setText(editNoteTitle)
+            description.setText(editNoteDescription)
+        }
         return view
     }
 
@@ -43,11 +60,11 @@ class AddNoteFragment : Fragment(), View.OnClickListener {
     }
 
     private fun saveNote() {
-        var mTitle: String = note_title.text.toString()
-        var mDescription: String = note_description.text.toString()
-        if (mTitle?.isNullOrEmpty()) Toast.makeText(context, getString(R.string.enter_title), Toast.LENGTH_SHORT).show()
-        else if (mDescription?.isNullOrEmpty()) Toast.makeText(context, getString(R.string.enter_description), Toast.LENGTH_SHORT).show()
-        else if (mTitle?.isNullOrEmpty() && mDescription?.isNullOrEmpty())
+        val mTitle: String = note_title.text.toString()
+        val mDescription: String = note_description.text.toString()
+        if (mTitle.isNullOrEmpty()) Toast.makeText(context, getString(R.string.enter_title), Toast.LENGTH_SHORT).show()
+        else if (mDescription.isNullOrEmpty()) Toast.makeText(context, getString(R.string.enter_description), Toast.LENGTH_SHORT).show()
+        else if (mTitle.isNullOrEmpty() && mDescription.isNullOrEmpty())
             Toast.makeText(context, getString(R.string.message_empty_note), Toast.LENGTH_SHORT).show()
         else {
             var noteMode = NoteModel(0, mTitle, mDescription)

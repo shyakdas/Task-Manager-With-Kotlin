@@ -24,6 +24,10 @@ class MainActivity : AppCompatActivity(), View.OnClickListener, NoteItemListener
     private lateinit var listCategoryDao: NoteDao
     private lateinit var appDatabase: AppDatabase
 
+    companion object {
+        var TAG: String = MainActivity.javaClass.name
+    }
+
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_main)
@@ -35,22 +39,22 @@ class MainActivity : AppCompatActivity(), View.OnClickListener, NoteItemListener
         recylerview.layoutManager = LinearLayoutManager(this)
         AsyncTask.execute {
             recylerview.adapter = NoteAdapter(listCategoryDao.getAll(), this, this)
-            Log.d("TAG", "listSize==" + listCategoryDao.getAll().size)
+            Log.d(TAG, "listSize ${listCategoryDao.getAll().size}")
         }
     }
 
     override fun onClick(v: View?) {
         when (v?.id) {
             R.id.search_main -> {
-                var searchFragment = SearchFragment()
+                val searchFragment = SearchFragment()
                 supportFragmentManager.inTransaction { add(R.id.top, searchFragment) }
             }
             R.id.sort_main -> {
-                var sortFragment = SortFragment()
+                val sortFragment = SortFragment()
                 supportFragmentManager.inTransaction { add(R.id.top, sortFragment) }
             }
             R.id.new_note_main -> {
-                var addNoteFragment = AddNoteFragment()
+                val addNoteFragment = AddNoteFragment()
                 supportFragmentManager.inTransaction { add(R.id.top, addNoteFragment) }
             }
         }
@@ -63,7 +67,15 @@ class MainActivity : AppCompatActivity(), View.OnClickListener, NoteItemListener
         fragmentTransaction.commit()
     }
 
-    override fun onPostClick(position: Int) {
-        Log.d("TAG", "position==" + position)
+    override fun onPostClick(position: Int, noteTitle: String, noteDescription: String) {
+        Log.d(TAG, "position $position")
+        val addNoteFragment = AddNoteFragment()
+        val args = Bundle()
+        args.putBoolean("isToUpdateNote", true)
+        args.putInt("position", position)
+        args.putString("title", noteTitle)
+        args.putString("description", noteDescription)
+        addNoteFragment.arguments = args
+        supportFragmentManager.inTransaction { add(R.id.top, addNoteFragment) }
     }
 }
