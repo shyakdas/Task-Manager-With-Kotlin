@@ -6,10 +6,12 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import com.todolist.com.todolist.R
+import com.todolist.com.todolist.listener.NoteItemListener
 import com.todolist.com.todolist.model.NoteModel
 import kotlinx.android.synthetic.main.note_item.view.*
 
-class NoteAdapter(private val items: List<NoteModel>, private val context: Context) : RecyclerView.Adapter<NoteViewHolder>() {
+class NoteAdapter(private val items: List<NoteModel>, private val context: Context, var noteItemListener: NoteItemListener) :
+        RecyclerView.Adapter<NoteAdapter.NoteViewHolder>() {
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): NoteViewHolder {
         return NoteViewHolder(LayoutInflater.from(context).inflate(R.layout.note_item, parent, false))
@@ -20,12 +22,17 @@ class NoteAdapter(private val items: List<NoteModel>, private val context: Conte
     }
 
     override fun onBindViewHolder(holder: NoteViewHolder, position: Int) {
-        holder?.mTitle?.text = items.get(position).title
-        holder?.mDescription?.text = items.get(position).description
+        holder.bind(items[position])
+        holder.itemView.setOnClickListener { noteItemListener.onPostClick(position) }
     }
-}
 
-class NoteViewHolder(view: View) : RecyclerView.ViewHolder(view) {
-    val mTitle = view.item_title!!
-    val mDescription = view.item_description!!
+    class NoteViewHolder(view: View) : RecyclerView.ViewHolder(view) {
+        private val mTitle = view.item_title!!
+        private val mDescription = view.item_description!!
+
+        fun bind(noteModel: NoteModel) {
+            mTitle.text = noteModel.title
+            mDescription.text = noteModel.description
+        }
+    }
 }

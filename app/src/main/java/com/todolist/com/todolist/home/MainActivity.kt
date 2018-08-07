@@ -14,11 +14,12 @@ import com.todolist.com.todolist.adapter.NoteAdapter
 import com.todolist.com.todolist.addnote.AddNoteFragment
 import com.todolist.com.todolist.database.AppDatabase
 import com.todolist.com.todolist.database.NoteDao
+import com.todolist.com.todolist.listener.NoteItemListener
 import com.todolist.com.todolist.search.SearchFragment
 import com.todolist.com.todolist.sort.SortFragment
 import kotlinx.android.synthetic.main.activity_main.*
 
-class MainActivity : AppCompatActivity(), View.OnClickListener {
+class MainActivity : AppCompatActivity(), View.OnClickListener, NoteItemListener {
 
     private lateinit var listCategoryDao: NoteDao
     private lateinit var appDatabase: AppDatabase
@@ -33,7 +34,7 @@ class MainActivity : AppCompatActivity(), View.OnClickListener {
         listCategoryDao = appDatabase.listNoteDao()
         recylerview.layoutManager = LinearLayoutManager(this)
         AsyncTask.execute {
-            recylerview.adapter = NoteAdapter(listCategoryDao.getAll(), this)
+            recylerview.adapter = NoteAdapter(listCategoryDao.getAll(), this, this)
             Log.d("TAG", "listSize==" + listCategoryDao.getAll().size)
         }
     }
@@ -60,5 +61,9 @@ class MainActivity : AppCompatActivity(), View.OnClickListener {
         fragmentTransaction.func()
         fragmentTransaction.addToBackStack(null)
         fragmentTransaction.commit()
+    }
+
+    override fun onPostClick(position: Int) {
+        Log.d("TAG", "position==" + position)
     }
 }
