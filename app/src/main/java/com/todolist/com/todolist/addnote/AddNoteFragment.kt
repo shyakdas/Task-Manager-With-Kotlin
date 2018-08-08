@@ -73,11 +73,12 @@ class AddNoteFragment : Fragment(), View.OnClickListener {
         else if (mTitle.isNullOrEmpty() && mDescription.isNullOrEmpty())
             Toast.makeText(context, getString(R.string.message_empty_note), Toast.LENGTH_SHORT).show()
         else {
-            val noteMode = NoteModel(noteId+1, mTitle, mDescription)
             if (!isForUpdate) {
+                val noteMode = NoteModel(noteId, mTitle, mDescription)
                 Single.fromCallable { listCategoryDao.insert(noteMode) }
                         .subscribeOn(Schedulers.io()).observeOn(AndroidSchedulers.mainThread()).subscribe()
             } else {
+                val noteMode = NoteModel(noteId + 1, mTitle, mDescription)
                 Single.fromCallable { listCategoryDao.updateItem(noteMode) }.subscribeOn(Schedulers.io())
                         .observeOn(AndroidSchedulers.mainThread())
                         .subscribe()
