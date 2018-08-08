@@ -1,7 +1,6 @@
 package com.todolist.com.todolist.addnote
 
 import android.content.Intent
-import android.os.AsyncTask
 import android.os.Bundle
 import android.support.design.widget.FloatingActionButton
 import android.support.v4.app.Fragment
@@ -18,6 +17,9 @@ import com.todolist.com.todolist.database.AppDatabase
 import com.todolist.com.todolist.database.NoteDao
 import com.todolist.com.todolist.home.MainActivity
 import com.todolist.com.todolist.model.NoteModel
+import io.reactivex.Single
+import io.reactivex.android.schedulers.AndroidSchedulers
+import io.reactivex.schedulers.Schedulers
 import kotlinx.android.synthetic.main.addnote.*
 
 
@@ -68,14 +70,11 @@ class AddNoteFragment : Fragment(), View.OnClickListener {
             Toast.makeText(context, getString(R.string.message_empty_note), Toast.LENGTH_SHORT).show()
         else {
             var noteMode = NoteModel(0, mTitle, mDescription)
-            AsyncTask.execute {
-                listCategoryDao.insert(noteMode)
-                activity?.runOnUiThread {
-                    val intent = Intent(activity, MainActivity::class.java)
-                    startActivity(intent)
-                    activity!!.finish()
-                }
-            }
+            Single.fromCallable { listCategoryDao.insert(noteMode) }
+                    .subscribeOn(Schedulers.io()).observeOn(AndroidSchedulers.mainThread()).subscribe()
+            val intent = Intent(activity, MainActivity::class.java)
+            startActivity(intent)
+            activity!!.finish()
         }
     }
 }

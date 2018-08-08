@@ -1,6 +1,5 @@
 package com.todolist.com.todolist.home
 
-import android.os.AsyncTask
 import android.os.Bundle
 import android.support.v4.app.FragmentManager
 import android.support.v4.app.FragmentTransaction
@@ -15,14 +14,18 @@ import com.todolist.com.todolist.addnote.AddNoteFragment
 import com.todolist.com.todolist.database.AppDatabase
 import com.todolist.com.todolist.database.NoteDao
 import com.todolist.com.todolist.listener.NoteItemListener
+import com.todolist.com.todolist.model.NoteModel
 import com.todolist.com.todolist.search.SearchFragment
 import com.todolist.com.todolist.sort.SortFragment
+import io.reactivex.android.schedulers.AndroidSchedulers
+import io.reactivex.schedulers.Schedulers
 import kotlinx.android.synthetic.main.activity_main.*
 
 class MainActivity : AppCompatActivity(), View.OnClickListener, NoteItemListener {
 
     private lateinit var listCategoryDao: NoteDao
     private lateinit var appDatabase: AppDatabase
+    private var itemList: List<NoteModel> = ArrayList()
 
     companion object {
         var TAG: String = MainActivity.javaClass.name
@@ -37,10 +40,11 @@ class MainActivity : AppCompatActivity(), View.OnClickListener, NoteItemListener
         appDatabase = ToDoList.database!!
         listCategoryDao = appDatabase.listNoteDao()
         recylerview.layoutManager = LinearLayoutManager(this)
-        AsyncTask.execute {
-            recylerview.adapter = NoteAdapter(listCategoryDao.getAll(), this, this)
-            Log.d(TAG, "listSize ${listCategoryDao.getAll().size}")
-        }
+        appDatabase.listNoteDao().getAll().subscribeOn(Schedulers.io()).observeOn(AndroidSchedulers.mainThread())
+                .subscribe { itemList ->
+                    listCategoryDao.getAll()
+                    recylerview.adapter = NoteAdapter(itemList, this, this)
+                }
     }
 
     override fun onClick(v: View?) {

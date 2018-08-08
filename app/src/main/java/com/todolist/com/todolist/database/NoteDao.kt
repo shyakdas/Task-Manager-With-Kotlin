@@ -1,16 +1,18 @@
 package com.todolist.com.todolist.database
 
-import android.arch.persistence.room.Dao
-import android.arch.persistence.room.Insert
-import android.arch.persistence.room.Query
+import android.arch.persistence.room.*
 import com.todolist.com.todolist.model.NoteModel
+import io.reactivex.Flowable
 
 @Dao
 interface NoteDao {
 
     @Query("SELECT * FROM note")
-    fun getAll(): List<NoteModel>
+    fun getAll(): Flowable<List<NoteModel>>
 
     @Insert
     fun insert(vararg listCategories: NoteModel)
+
+    @Update(onConflict = OnConflictStrategy.REPLACE)
+    fun updateItem(item: NoteModel)
 }
