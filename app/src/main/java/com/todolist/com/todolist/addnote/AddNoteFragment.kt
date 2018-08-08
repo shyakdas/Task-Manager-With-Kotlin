@@ -30,6 +30,8 @@ class AddNoteFragment : Fragment(), View.OnClickListener {
 
     companion object {
         private val TAG: String = AddNoteFragment.javaClass.name
+        private var isForUpdate: Boolean = false
+        private var noteId: Long = 0
     }
 
     override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?): View? {
@@ -44,10 +46,12 @@ class AddNoteFragment : Fragment(), View.OnClickListener {
         appDatabase = ToDoList.database!!
         listCategoryDao = appDatabase.listNoteDao()
         if (arguments?.getBoolean("isToUpdateNote") != null) {
+            isForUpdate = true
             mNoteBar.text = "Edit Note"
             val editNoteTitle: String = arguments?.getString("title", "")!!
             val editNoteDescription: String = arguments?.getString("description", "")!!
             val editNotePosition = arguments?.getInt("position", -1)
+            noteId = editNotePosition!!.toLong()
             title.setText(editNoteTitle)
             description.setText(editNoteDescription)
         }
@@ -69,9 +73,15 @@ class AddNoteFragment : Fragment(), View.OnClickListener {
         else if (mTitle.isNullOrEmpty() && mDescription.isNullOrEmpty())
             Toast.makeText(context, getString(R.string.message_empty_note), Toast.LENGTH_SHORT).show()
         else {
-            var noteMode = NoteModel(0, mTitle, mDescription)
-            Single.fromCallable { listCategoryDao.insert(noteMode) }
-                    .subscribeOn(Schedulers.io()).observeOn(AndroidSchedulers.mainThread()).subscribe()
+            val noteMode = NoteModel(noteId+1, mTitle, mDescription)
+            if (!isForUpdate) {
+                Single.fromCallable { listCategoryDao.insert(noteMode) }
+                        .subscribeOn(Schedulers.io()).observeOn(AndroidSchedulers.mainThread()).subscribe()
+            } else {
+                Single.fromCallable { listCategoryDao.updateItem(noteMode) }.subscribeOn(Schedulers.io())
+                        .observeOn(AndroidSchedulers.mainThread())
+                        .subscribe()
+            }
             val intent = Intent(activity, MainActivity::class.java)
             startActivity(intent)
             activity!!.finish()

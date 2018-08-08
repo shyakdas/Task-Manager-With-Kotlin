@@ -14,7 +14,6 @@ import com.todolist.com.todolist.addnote.AddNoteFragment
 import com.todolist.com.todolist.database.AppDatabase
 import com.todolist.com.todolist.database.NoteDao
 import com.todolist.com.todolist.listener.NoteItemListener
-import com.todolist.com.todolist.model.NoteModel
 import com.todolist.com.todolist.search.SearchFragment
 import com.todolist.com.todolist.sort.SortFragment
 import io.reactivex.android.schedulers.AndroidSchedulers
@@ -25,7 +24,6 @@ class MainActivity : AppCompatActivity(), View.OnClickListener, NoteItemListener
 
     private lateinit var listCategoryDao: NoteDao
     private lateinit var appDatabase: AppDatabase
-    private var itemList: List<NoteModel> = ArrayList()
 
     companion object {
         var TAG: String = MainActivity.javaClass.name
