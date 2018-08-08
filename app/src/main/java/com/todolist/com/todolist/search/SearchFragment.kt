@@ -11,6 +11,10 @@ class SearchFragment : Fragment() {
 
     override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?): View? {
         val view: View = inflater!!.inflate(R.layout.search, container, false)
+        loadData()
         return view
+    }
+
+    private fun loadData() {
     }
 }
