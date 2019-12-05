@@ -1,4 +1,4 @@
-package com.todolist.com.todolist.model
+package com.todolist.com.taskmanager.model
 
 import androidx.room.ColumnInfo
 import androidx.room.Entity

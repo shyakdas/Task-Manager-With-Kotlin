@@ -1,25 +1,20 @@
-package com.todolist.com.todolist.search
+package com.todolist.com.taskmanager.search
 
 import android.os.Bundle
 import android.text.Editable
 import android.text.TextWatcher
-import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.widget.ImageView
 import androidx.fragment.app.Fragment
-import com.todolist.com.todolist.R
+import com.todolist.com.taskmanager.R
 import kotlinx.android.synthetic.main.search.*
 
 class SearchFragment : Fragment(), View.OnClickListener {
 
-    companion object {
-        val TAG: String = SearchFragment.javaClass.name
-    }
-
     override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?): View? {
-        val view: View = inflater!!.inflate(R.layout.search, container, false)
+        val view: View = inflater.inflate(R.layout.search, container, false)
         val mBackPressed: ImageView = view.findViewById(R.id.search_main)
         mBackPressed.setOnClickListener(this)
         loadData()
@@ -36,9 +31,7 @@ class SearchFragment : Fragment(), View.OnClickListener {
             }
 
             override fun onTextChanged(s: CharSequence?, start: Int, before: Int, count: Int) {
-                Log.e(TAG, "onTextChanged==" + s.toString())
             }
-
         })
     }
 

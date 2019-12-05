@@ -1,4 +1,4 @@
-package com.todolist.com.todolist
+package com.todolist.com.taskmanager
 
 import org.junit.Test
 

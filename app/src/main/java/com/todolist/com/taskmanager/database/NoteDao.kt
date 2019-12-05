@@ -1,7 +1,7 @@
-package com.todolist.com.todolist.database
+package com.todolist.com.taskmanager.database
 
 import androidx.room.*
-import com.todolist.com.todolist.model.NoteModel
+import com.todolist.com.taskmanager.model.NoteModel
 import io.reactivex.Flowable
 
 @Dao

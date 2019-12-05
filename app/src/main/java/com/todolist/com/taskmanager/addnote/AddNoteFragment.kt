@@ -1,4 +1,4 @@
-package com.todolist.com.todolist.addnote
+package com.todolist.com.taskmanager.addnote
 
 import android.content.Intent
 import android.os.Bundle
@@ -11,12 +11,12 @@ import android.widget.TextView
 import android.widget.Toast
 import androidx.fragment.app.Fragment
 import com.google.android.material.floatingactionbutton.FloatingActionButton
-import com.todolist.com.todolist.R
-import com.todolist.com.todolist.ToDoList
-import com.todolist.com.todolist.database.AppDatabase
-import com.todolist.com.todolist.database.NoteDao
-import com.todolist.com.todolist.home.MainActivity
-import com.todolist.com.todolist.model.NoteModel
+import com.todolist.com.taskmanager.R
+import com.todolist.com.taskmanager.TaskManagerApplication
+import com.todolist.com.taskmanager.database.AppDatabase
+import com.todolist.com.taskmanager.database.NoteDao
+import com.todolist.com.taskmanager.home.MainActivity
+import com.todolist.com.taskmanager.model.NoteModel
 import io.reactivex.Single
 import io.reactivex.android.schedulers.AndroidSchedulers
 import io.reactivex.schedulers.Schedulers
@@ -29,7 +29,6 @@ class AddNoteFragment : Fragment(), View.OnClickListener {
     private lateinit var appDatabase: AppDatabase
 
     companion object {
-        private val TAG: String = AddNoteFragment.javaClass.name
         private var isForUpdate: Boolean = false
         private var noteId: Long = 0
     }
@@ -43,7 +42,7 @@ class AddNoteFragment : Fragment(), View.OnClickListener {
         val description: EditText = view.findViewById(R.id.note_description)
         mSaveNote.setOnClickListener(this)
         mCrossButton.setOnClickListener(this)
-        appDatabase = ToDoList.database!!
+        appDatabase = TaskManagerApplication.database!!
         listCategoryDao = appDatabase.listNoteDao()
         if (arguments?.getBoolean("isToUpdateNote") != null) {
             isForUpdate = true
@@ -68,9 +67,9 @@ class AddNoteFragment : Fragment(), View.OnClickListener {
     private fun saveNote() {
         val mTitle: String = note_title.text.toString()
         val mDescription: String = note_description.text.toString()
-        if (mTitle.isNullOrEmpty()) Toast.makeText(context, getString(R.string.enter_title), Toast.LENGTH_SHORT).show()
-        else if (mDescription.isNullOrEmpty()) Toast.makeText(context, getString(R.string.enter_description), Toast.LENGTH_SHORT).show()
-        else if (mTitle.isNullOrEmpty() && mDescription.isNullOrEmpty())
+        if (mTitle.isEmpty()) Toast.makeText(context, getString(R.string.enter_title), Toast.LENGTH_SHORT).show()
+        else if (mDescription.isEmpty()) Toast.makeText(context, getString(R.string.enter_description), Toast.LENGTH_SHORT).show()
+        else if (mTitle.isEmpty() && mDescription.isEmpty())
             Toast.makeText(context, getString(R.string.message_empty_note), Toast.LENGTH_SHORT).show()
         else {
             if (!isForUpdate) {

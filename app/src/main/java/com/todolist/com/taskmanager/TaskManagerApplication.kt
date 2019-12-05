@@ -1,10 +1,10 @@
-package com.todolist.com.todolist
+package com.todolist.com.taskmanager
 
 import android.app.Application
 import androidx.room.Room
-import com.todolist.com.todolist.database.AppDatabase
+import com.todolist.com.taskmanager.database.AppDatabase
 
-class ToDoList : Application() {
+class TaskManagerApplication : Application() {
 
     companion object {
         var database: AppDatabase? = null

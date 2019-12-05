@@ -1,4 +1,4 @@
-package com.todolist.com.todolist.listener
+package com.todolist.com.taskmanager.listener
 
 interface NoteItemListener {
 
