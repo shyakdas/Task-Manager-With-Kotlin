@@ -1,10 +1,10 @@
 package com.todolist.com.todolist.adapter
 
 import android.content.Context
-import android.support.v7.widget.RecyclerView
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import androidx.recyclerview.widget.RecyclerView
 import com.todolist.com.todolist.R
 import com.todolist.com.todolist.listener.NoteItemListener
 import com.todolist.com.todolist.model.NoteModel

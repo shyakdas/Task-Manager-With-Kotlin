@@ -1,6 +1,6 @@
 package com.todolist.com.todolist.database
 
-import android.arch.persistence.room.*
+import androidx.room.*
 import com.todolist.com.todolist.model.NoteModel
 import io.reactivex.Flowable
 

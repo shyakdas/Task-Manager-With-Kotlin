@@ -1,8 +1,8 @@
 package com.todolist.com.todolist.model
 
-import android.arch.persistence.room.ColumnInfo
-import android.arch.persistence.room.Entity
-import android.arch.persistence.room.PrimaryKey
+import androidx.room.ColumnInfo
+import androidx.room.Entity
+import androidx.room.PrimaryKey
 
 @Entity(tableName = "note")
 data class NoteModel(@ColumnInfo(name = "id") @PrimaryKey(autoGenerate = true) var id: Long = 0,
