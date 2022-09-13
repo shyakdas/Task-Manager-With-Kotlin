@@ -1,6 +1,5 @@
 package com.todolist.com.taskmanager.addnote
 
-import android.content.Intent
 import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
@@ -8,19 +7,12 @@ import android.view.ViewGroup
 import android.widget.EditText
 import android.widget.ImageView
 import android.widget.TextView
-import android.widget.Toast
 import androidx.fragment.app.Fragment
 import com.google.android.material.floatingactionbutton.FloatingActionButton
 import com.todolist.com.taskmanager.R
 import com.todolist.com.taskmanager.TaskManagerApplication
 import com.todolist.com.taskmanager.database.AppDatabase
 import com.todolist.com.taskmanager.database.NoteDao
-import com.todolist.com.taskmanager.home.MainActivity
-import com.todolist.com.taskmanager.model.NoteModel
-import io.reactivex.Single
-import io.reactivex.android.schedulers.AndroidSchedulers
-import io.reactivex.schedulers.Schedulers
-import kotlinx.android.synthetic.main.addnote.*
 
 
 class AddNoteFragment : Fragment(), View.OnClickListener {
@@ -65,26 +57,26 @@ class AddNoteFragment : Fragment(), View.OnClickListener {
     }
 
     private fun saveNote() {
-        val mTitle: String = note_title.text.toString()
-        val mDescription: String = note_description.text.toString()
-        if (mTitle.isEmpty()) Toast.makeText(context, getString(R.string.enter_title), Toast.LENGTH_SHORT).show()
-        else if (mDescription.isEmpty()) Toast.makeText(context, getString(R.string.enter_description), Toast.LENGTH_SHORT).show()
-        else if (mTitle.isEmpty() && mDescription.isEmpty())
-            Toast.makeText(context, getString(R.string.message_empty_note), Toast.LENGTH_SHORT).show()
-        else {
-            if (!isForUpdate) {
-                val noteMode = NoteModel(noteId, mTitle, mDescription)
-                Single.fromCallable { listCategoryDao.insert(noteMode) }
-                        .subscribeOn(Schedulers.io()).observeOn(AndroidSchedulers.mainThread()).subscribe()
-            } else {
-                val noteMode = NoteModel(noteId + 1, mTitle, mDescription)
-                Single.fromCallable { listCategoryDao.updateItem(noteMode) }.subscribeOn(Schedulers.io())
-                        .observeOn(AndroidSchedulers.mainThread())
-                        .subscribe()
-            }
-            val intent = Intent(activity, MainActivity::class.java)
-            startActivity(intent)
-            activity!!.finish()
-        }
+//        val mTitle: String = note_title.text.toString()
+//        val mDescription: String = note_description.text.toString()
+//        if (mTitle.isEmpty()) Toast.makeText(context, getString(R.string.enter_title), Toast.LENGTH_SHORT).show()
+//        else if (mDescription.isEmpty()) Toast.makeText(context, getString(R.string.enter_description), Toast.LENGTH_SHORT).show()
+//        else if (mTitle.isEmpty() && mDescription.isEmpty())
+//            Toast.makeText(context, getString(R.string.message_empty_note), Toast.LENGTH_SHORT).show()
+//        else {
+//            if (!isForUpdate) {
+//                val noteMode = NoteModel(noteId, mTitle, mDescription)
+//                Single.fromCallable { listCategoryDao.insert(noteMode) }
+//                        .subscribeOn(Schedulers.io()).observeOn(AndroidSchedulers.mainThread()).subscribe()
+//            } else {
+//                val noteMode = NoteModel(noteId + 1, mTitle, mDescription)
+//                Single.fromCallable { listCategoryDao.updateItem(noteMode) }.subscribeOn(Schedulers.io())
+//                        .observeOn(AndroidSchedulers.mainThread())
+//                        .subscribe()
+//            }
+//            val intent = Intent(activity, MainActivity::class.java)
+//            startActivity(intent)
+//            activity!!.finish()
+//        }
     }
 }

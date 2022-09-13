@@ -12,7 +12,5 @@ class TaskManagerApplication : Application() {
 
     override fun onCreate() {
         super.onCreate()
-        database = Room.databaseBuilder(this, AppDatabase::class.java,
-                "list-master-db").build()
     }
 }
